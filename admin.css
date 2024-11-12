@@ -1,0 +1,285 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(241, 240, 240);
+  font-family: "Kanit", sans-serif;
+}
+#notification{
+  background-color: rgb(37, 218, 37);
+  padding: 2rem 1rem;
+  
+}
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.thenavbanner {
+  height: 15vh;
+  width: 100%;
+  background-image: url(fastfood.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.maincontainer {
+  width: 82%;
+  height: 100%;
+  background-color: rgb(241, 240, 240);
+  /* #FFCE32 */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  z-index: 4;
+}
+.sidebar {
+  width: 18%;
+  height: 90%;
+  z-index: 10;
+  background-color: white;
+  box-shadow: 5px 5px rgb(218, 217, 217);
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  overflow: hidden;
+  position: fixed;
+  top: 5%;
+  left: 2%;
+  border-radius: 2%;
+}
+.buttons {
+  width: 100%;
+  /* padding: 0rem 4rem; */
+  height: 7%;
+  display: flex;
+  align-items: center;
+  /* padding-left: 3rem; */
+  /* justify-content: space-around; */
+}
+
+.buttons > a {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+}
+.buttons i {
+  width: 10%;
+}
+.buttons {
+  transition: 0.4s all ease;
+  padding: 0;
+  padding-left: 1rem;
+  padding-top: 0.6rem;
+}
+.buttons:hover {
+  background-color: black;
+  color: white;
+  /* transform: scale(1.1); */
+}
+.logoutbtn:hover{
+  background-color: red;
+}
+
+.buttons:hover a {
+  color: white;
+}
+
+.nav {
+  width: 86%;
+  justify-self: flex-end;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0rem;
+  /* position: sticky;
+  top: 0; */
+  z-index: 9;
+  background-color: rgb(241, 240, 240);
+}
+.nav > .heading {
+  font-size: 3rem;
+  color: rgb(255, 132, 0);
+  text-shadow: 2px 2px black;
+}
+.nav > .profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  width: 10%;
+  height: 100%;
+  gap: 10%;
+}
+.nav > .profile > img {
+  height: 75%;
+  width: 48%;
+  border-radius: 50%;
+  /* margin-right: 1rem; */
+}
+.nav > .profile > p {
+  font-size: 0.6rem;
+  color: grey;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+.totalcontainer {
+  width: 85%;
+  height: 30vh;
+  display: flex;
+  /* justify-content: space-around; */
+  flex-direction: column;
+}
+.boxes {
+  display: flex;
+  justify-content: space-between;
+}
+.total {
+  width: 27%;
+  height: 50%;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 7px;
+  position: relative;
+}
+.totalpersons {
+  border-bottom: 2.5rem solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  box-shadow: 10px 10px rgb(155, 155, 155);
+}
+.totalcourses {
+  border-bottom: 2.5rem solid rgb(220, 53, 53);
+  border-top: 1px solid rgb(220, 53, 53);
+  border-left: 1px solid rgb(220, 53, 53);
+  border-right: 1px solid rgb(220, 53, 53);
+  box-shadow: 10px 10px rgb(242, 186, 186);
+}
+.totaldepartments {
+  border-bottom: 2.5rem solid rgb(37, 193, 191);
+  border-top: 1px solid rgb(37, 193, 191);
+  border-left: 1px solid rgb(37, 193, 191);
+  border-right: 1px solid rgb(37, 193, 191);
+  box-shadow: 10px 10px rgb(173, 243, 237);
+}
+.total h1 {
+  margin: 0;
+}
+.total .num {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
+.total .num > i {
+  font-size: 2rem;
+}
+.flag {
+  padding: 0.1rem 0.3rem;
+  /* background-color: black; */
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 3px;
+  position: absolute;
+  bottom: -33px;
+  left: 13px;
+  color: white;
+}
+
+.third {
+  height: 8vh;
+  width: 86%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: row;
+  gap: 10%;
+  margin-bottom: 1rem;
+}
+.textbanner {
+  /* background-color: white; */
+  display: flex;
+  align-items: center;
+  height: inherit;
+  height: 70%;
+  width: 70%;
+  font-size: 1.3rem;
+  color: rgb(255, 132, 0);
+  text-shadow: 1.2px 1.2px black;
+
+  /* padding: 1rem; */
+  /* box-shadow: 10px 10px 10px rgb(188, 188, 188); */
+}
+table{
+  margin-bottom: 3rem;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+table td,
+table th {
+  padding: 0.2rem 0.4rem;
+}
+
+
+
+#table3 td,
+#table3 th {
+  padding: 0.7rem 0.4rem;
+}
+/* table{
+    width: 100%;
+} */
+
+#table1,
+#table2,
+#table3 {
+  display: none;
+  width: 100%;
+}
+#total_departments_table,
+#total_courses_table,
+#total_students_table {
+  width: 85%;
+}
+
+
+.editbtn {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(7, 114, 227);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  transition: 0.2s all ease;
+}
+.editbtn:hover {
+  background-color: rgb(18, 73, 132);
+}
+.deletebtn {
+  text-decoration: none;
+  color: white;
+  background-color: red;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  transition: 0.2s all ease;
+}
+.deletebtn:hover {
+  background-color: rgb(151, 7, 7);
+}
+
+

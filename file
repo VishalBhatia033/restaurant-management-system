@@ -1,0 +1,232 @@
+<?php
+include "connection.php";
+$dir= "files/";
+$filePath=$dir.basename($_FILES["imgfile"]["name"]);
+$isUpload=true;
+$isvalid=true;
+// $fileType=strtolower(pathinfo($filePath,PATHINFO_EXTENSION));
+// $filePath="";
+$fileType="";
+// code to check the upload imaes is fake or actual 
+if(isset($_POST["submit"])){
+$filePath=$dir.basename($_FILES["imgfile"]["name"]);
+$fileType=strtolower(pathinfo($filePath,PATHINFO_EXTENSION));
+
+    $check=getimagesize($_FILES["imgfile"]["tmp_name"]);
+    if($check!=false){
+        // echo"file is an image -".$check["mime"]."<br";
+        // echo"<p class='text-sucess'>file uploaded<?p>";
+        $isUpload=true;
+    }else{
+        echo"file is not an image <br>";
+        $isUpload=false;
+        $isvalid=false;
+    }
+}
+// code to check files is already present in folder or not 
+if(file_exists($filePath)){
+    echo"sorry , file already exists.<br>";
+    $isUpload=false;
+    $isvalid=false;
+}
+// code to insure the filesize 
+if($_FILES["imgfile"]["size"]>5000000){
+    echo"sorry, your file is too large <br>";
+    $isUpload=false;
+    $isvalid=false;
+}
+// Check if file is a image    
+if($fileType!="jpg"&&
+$fileType!="png"&&
+$fileType!="jpeg"&&
+$fileType!="gif"
+){
+    echo "Sorry, only jpg,png,jpeg and gif files are allowed. </br>";
+    $isUpload=false;
+    $isvalid=false;
+}
+// Check if  if the flag isupload is set to 0 due to error or not
+if(!$isUpload){
+    echo "Sorry, your file was not uploaded.</br>";
+}else{
+    if(move_uploaded_file($_FILES["imgfile"]
+    ["tmp_name"],$filePath)){
+        $filename=htmlspecialchars(basename($_FILES['imgfile']["name"]));
+
+        
+    $iname = $conn->real_escape_string($_POST['imgname']);
+    $desc= $conn->real_escape_string($_POST['desc']);
+    $price = $conn->real_escape_string($_POST['price']);
+    $category = $conn->real_escape_string($_POST['category']);
+    $type = $conn->real_escape_string($_POST['type']);
+
+
+        // echo "The file ".htmlspecialchars(basename($_FILES["imgfile"]["name"]));
+        $stmt=$conn->prepare("INSERT INTO  menu (image,iname,description,price,category,type) VALUES (?,?,?,?,?,?)");
+        $stmt->bind_param("sssiss",$filename,$iname,$desc,$price,$category,$type);
+        if($stmt->execute()){
+            echo" <p class='text-success text-center'>the file " .$filename."has been uploaded and saved in the database</p>";
+    echo "data inserted";
+
+        }else{
+            echo" there was and error uploading this file";
+            $isvalid=false;
+        }
+    }else{
+        echo "Sorry, there was an error uploading your file.";
+        $isvalid=false;
+
+    }
+
+
+    $stmt->close();
+
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="top">
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" method="post">
+<label for="image">Add Image</label>
+<input type="file" name="imgfile">
+<label for="name">Name of Item</label>
+<input type="text" name="imgname">
+<label for="desc">Description of Item</label>
+<input type="text" name="desc">
+
+<label for="price">Price of Item</label>
+<input type="number" name="price">
+
+<label for="catr">Category of Item</label>
+<select name="category">
+    <option value="burger">Burger</option>
+    <option value="salad">Salad</option>
+    <option value="cake">Cakes</option>
+    <option value="drinks">Drinks</option>
+    <option value="pizza">Pizza</option>
+    <option value="chicken">chicken</option>
+</select>
+<label>Type</label>
+<select name="type" id="type">
+<option value="veg.png">Veg</option>
+<option value="nonveg.png">NonVeg</option>
+<option value="">None</option>
+
+</select>
+<button>Submit</button>
+    </form>
+    </div>
+    <div class="bottom">
+        <?php
+        // $result=
+        ?>
+    </div>
+</body>
+</html>
+
+<!-- codesssssslk;fjgsdfg -->
+<!-- <?php
+session_start();
+include "connection.php";
+$orderid='';
+$var=1;
+// if(isset()) {
+    $sql = "SELECT * FROM  WHERE orderid= $orderid";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $edit_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "No record found";
+    }
+ 
+
+
+if(isset($_POST['change'])) {
+    $updatedAdd= $conn->real_escape_string($_POST['orderstatus']);
+    $updateSql = "UPDATE orders SET orderstatus WHERE==$orderid";
+    $updateStmt2 = $conn->prepare($updateSql);
+    $updateStmt2->bind_param("s",$updatedAdd);
+    $updateStmt2->execute();
+
+    if ($updateStmt2->affected_rows > 0) {
+        echo "Record updated successfully";
+        // Redirect or further processing
+    } else {
+        if($updateStmt2->error) {
+            echo "Error updating record: " . $updateStmt2->error;
+        } else {
+            echo "No changes were made to the record.";
+        }
+    }}
+    ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<?php   $sql="SELECT * FROM orders WHERE orderstatus='pending'";
+$result=$conn->query($sql);
+if($result->num_rows>0){
+        echo "<table>
+       <tr>
+       <th>S.No.</th>
+       <th>Item</th>
+       <th>User Id</th>
+       <th>Quantity</th>
+       <th>Price</th>
+       <th>Order Id</th>
+       <th>Status</th>
+       <th>Order Date</th>
+       <th>Change Status</th>
+       </tr>
+        ";
+    while($row=$result->fetch_assoc()){
+        $orderid=$row['orderid'];
+echo "
+<tr>
+<td>".$var++  . "</td>
+<td>" .$row['item']."</td>
+<td>" .$row['username']."</td>
+<td>" .$row['quantity']."</td>
+<td>" .$row['price']. "</td>
+<td>"  .$row['orderid']. "</td>
+<td>"  .$row['status']. "</td>
+<td>"  .$row['createdat']."</td>
+<td>". "<form action='' method='post'>".
+'<select name="orderstatus" >
+<option value="delivered">Delivered</option>
+<option value="dispatched">Dispatched</option>
+<option value="confirmed">Confirmed</option>
+<option value="packed">Packed</option>
+</select>
+'.
+"<button type='submit' value='change' name='change'>
+Submit
+</button>"
+."</form>"
+
+."</td>
+<tr>
+";
+}echo "</table>";
+
+
+}
+?>
+</div>
+
+</body>
+</html> -->
